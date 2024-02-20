@@ -21,33 +21,41 @@ const orientation_1 = __importDefault(require("../src/classes/orientation"));
     });
     (0, globals_1.test)('should move forward in the Y axis', () => {
         rover.move('f');
-        console.log(typeof rover.getPositionElement());
-        (0, globals_1.expect)(rover.getPositionElement()).toBe(new coordinate_1.default(0, 1, map));
+        (0, globals_1.expect)(rover.getPositionElement()).toStrictEqual(new coordinate_1.default(0, 1, map));
     });
-    // test('should move foward in the X axis', () => {
-    // 	rover.orientation = 90;
-    // 	rover.moveForwardElement();
-    // 	map.computeMapElementCoordinates(rover);
-    // 	expect(rover.getPositionElement()).toBe('1 0 90');
-    // });
-    // test('should move backward', () => {
-    // 	rover.moveBackwardElement();
-    // 	map.computeMapElementCoordinates(rover);
-    // 	expect(rover.getPositionElement()).toBe('0 -1 0');
-    // });
-    // test('should turn left', () => {
-    // 	rover.turnLeftElement();
-    // 	map.computeMapElementCoordinates(rover);
-    // 	expect(rover.getPositionElement()).toBe('0 0 270');
-    // });
-    // test('should turn right', () => {
-    // 	rover.turnRightElement();
-    // 	map.computeMapElementCoordinates(rover);
-    // 	expect(rover.getPositionElement()).toBe('0 0 90');
-    // });
-    // test('should go to the opposite position when the element go to the edge of the map ', () => {
-    // 	rover.x = 10;
-    // 	map.computeMapElementCoordinates(rover);
-    // 	expect(rover.getPositionElement()).toBe('0 0 0');
-    // });
+    (0, globals_1.test)('should move foward in the X axis', () => {
+        rover.orientation.degree = 90;
+        rover.move('f');
+        (0, globals_1.expect)(rover.getPositionElement()).toStrictEqual(new coordinate_1.default(1, 0, map));
+    });
+    (0, globals_1.test)('should move backward in the Y axis', () => {
+        rover.move('b');
+        (0, globals_1.expect)(rover.getPositionElement()).toStrictEqual(new coordinate_1.default(0, 9, map));
+    });
+    (0, globals_1.test)('should move backward in the X axis', () => {
+        rover.orientation.degree = 90;
+        rover.move('b');
+        (0, globals_1.expect)(rover.getPositionElement()).toStrictEqual(new coordinate_1.default(9, 0, map));
+    });
+    (0, globals_1.test)('should rotate right', () => {
+        rover.turn('r');
+        (0, globals_1.expect)(rover.getOrientationElement()).toStrictEqual(new orientation_1.default(90));
+    });
+    (0, globals_1.test)('should rotate left', () => {
+        rover.turn('l');
+        (0, globals_1.expect)(rover.getOrientationElement()).toStrictEqual(new orientation_1.default(270));
+    });
+    (0, globals_1.test)('should ...', () => {
+        rover.turn('l');
+        rover.move('f');
+        rover.turn('r');
+        rover.turn('r');
+        rover.move('b');
+        (0, globals_1.expect)(rover.getPositionElement()).toStrictEqual(new coordinate_1.default(8, 0, map));
+        (0, globals_1.expect)(rover.getOrientationElement()).toStrictEqual(new orientation_1.default(90));
+    });
+    (0, globals_1.test)('should go to the opposite position when the element go to the edge of the map ', () => {
+        rover.position.setPosition(10, 0);
+        (0, globals_1.expect)(rover.getPositionElement()).toStrictEqual(new coordinate_1.default(0, 0, map));
+    });
 });

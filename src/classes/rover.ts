@@ -25,6 +25,8 @@ class Rover {
 				this.position.x += direction === 'f' ? -1 : 1;
 				break;
 		}
+
+		this.position.setPosition(this.position.x, this.position.y);
 	}
 
 	turn(direction: 'l' | 'r') {
