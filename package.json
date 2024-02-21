@@ -2,7 +2,7 @@
 	"name": "rover",
 	"version": "1.0.0",
 	"description": "",
-	"main": "src/classes/map/map.ts",
+	"main": "index.js",
 	"scripts": {
 		"test": "jest",
 		"prettier": "prettier --write ."
@@ -16,8 +16,8 @@
 		"prettier": "^3.2.5"
 	},
 	"devDependencies": {
-		"@jest/globals": "^29.7.0",
 		"@types/jest": "^29.5.12",
+		"jest": "^29.7.0",
 		"ts-jest": "^29.1.2",
 		"typescript": "^5.3.3"
 	}

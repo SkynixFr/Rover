@@ -1,10 +1,13 @@
+import Point from './point';
 class Map {
-	lengthX: number;
-	lengthY: number;
+	limit: Point;
 
-	constructor(lengthX: number, lengthY: number) {
-		this.lengthX = lengthX;
-		this.lengthY = lengthY;
+	constructor(limit: Point) {
+		this.limit = limit;
+	}
+
+	normalizePoint(point: Point) {
+		return point.moduloPoint(this.limit);
 	}
 }
 

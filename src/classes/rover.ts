@@ -10,37 +10,20 @@ class Rover {
 		this.orientation = orientation;
 	}
 
-	move(direction: 'f' | 'b') {
-		switch (this.orientation.degree) {
-			case 0:
-				this.position.y += direction === 'f' ? 1 : -1;
-				break;
-			case 90:
-				this.position.x += direction === 'f' ? 1 : -1;
-				break;
-			case 180:
-				this.position.y += direction === 'f' ? -1 : 1;
-				break;
-			case 270:
-				this.position.x += direction === 'f' ? -1 : 1;
-				break;
-		}
-
-		this.position.setPosition(this.position.x, this.position.y);
+	moveForward() {
+		this.position = this.position.increaseCoordinate(this.orientation.vector);
 	}
 
-	turn(direction: 'l' | 'r') {
-		this.orientation.degree += direction === 'l' ? 270 : 90;
-		this.orientation.degree %= 360;
+	moveBackward() {
+		this.position = this.position.decreaseCoordinate(this.orientation.vector);
 	}
 
-	getPositionElement() {
-		return this.position;
+	turnLeft() {
+		this.orientation = this.orientation.turnLeft();
 	}
 
-	getOrientationElement() {
-		return this.orientation;
+	turnRight() {
+		this.orientation = this.orientation.turnRight();
 	}
 }
-
 export default Rover;

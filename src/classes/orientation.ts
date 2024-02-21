@@ -1,8 +1,18 @@
-class Orientation {
-	degree: number;
+import Point from './point';
 
-	constructor(degree: number) {
-		this.degree = degree;
+class Orientation {
+	vector: Point;
+
+	constructor(vector: Point) {
+		this.vector = vector;
+	}
+
+	turnLeft() {
+		return new Orientation(new Point(-this.vector.y, this.vector.x));
+	}
+
+	turnRight() {
+		return new Orientation(new Point(this.vector.y, -this.vector.x));
 	}
 }
 

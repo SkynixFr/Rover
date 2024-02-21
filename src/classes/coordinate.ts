@@ -1,21 +1,21 @@
 import Map from './map';
-import mod from '../utils/computeModulo';
+import Point from './point';
 
 class Coordinate {
-	x: number;
-	y: number;
-	map: Map;
+	readonly point: Point;
+	readonly map: Map;
 
-	constructor(x: number, y: number, map: Map) {
+	constructor(point: Point, map: Map) {
 		this.map = map;
-		this.x = mod(x, this.map.lengthX);
-		this.y = mod(y, this.map.lengthY);
+		this.point = map.normalizePoint(point);
 	}
 
-	setPosition(x: number, y: number) {
-		return new Coordinate(x, y, this.map);
-		// this.x = mod(x, this.map.lengthX);
-		// this.y = mod(y, this.map.lengthY);
+	increaseCoordinate(vector: Point) {
+		return new Coordinate(this.point.addPoint(vector), this.map);
+	}
+
+	decreaseCoordinate(vector: Point) {
+		return new Coordinate(this.point.subtractPoint(vector), this.map);
 	}
 }
 
