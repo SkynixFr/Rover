@@ -5,10 +5,11 @@ describe('Map', () => {
 	let map: Map;
 	let initialPoint: Point;
 	let otherPoint: Point;
+
 	beforeEach(() => {
 		initialPoint = new Point(10, 10);
 		map = new Map(initialPoint);
-		otherPoint = new Point(15, 12);
+		otherPoint = new Point(5, 2);
 	});
 
 	test('should normalize a point', () => {
