@@ -15,12 +15,12 @@ describe('Coordinate', () => {
 	});
 
 	test('should increment the coordinate', () => {
-		const newCoordinate = coordinate.increaseCoordinate(vector);
+		const newCoordinate = coordinate.increase(vector);
 		expect(newCoordinate).toStrictEqual(new Coordinate(new Point(1, 2), map));
 	});
 
 	test('should decrement the coordinate', () => {
-		const newCoordinate = coordinate.decreaseCoordinate(vector);
+		const newCoordinate = coordinate.decrease(vector);
 		expect(newCoordinate).toStrictEqual(new Coordinate(new Point(9, 8), map));
 	});
 });

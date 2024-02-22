@@ -1,7 +1,8 @@
 import Coordinate from './coordinate';
-import Obstacles from './obstacles';
+
 import Orientation from './orientation';
 
+// Objet de valeur
 class Rover {
 	position: Coordinate;
 	orientation: Orientation;
@@ -11,26 +12,24 @@ class Rover {
 		this.orientation = orientation;
 	}
 
-	moveForward(obstacles: Obstacles) {
-		const newRover = new Rover(
-			this.position.increaseCoordinate(this.orientation.vector),
-			this.orientation
-		);
-		if (obstacles.isObstacleThere(newRover.position)) {
+	moveForward() {
+		const newPosition = this.position.increase(this.orientation.vector);
+
+		if (this.position.map.isObstacleThere(newPosition.point)) {
 			return this;
 		}
-		return newRover;
+
+		return new Rover(newPosition, this.orientation);
 	}
 
-	moveBackward(obstacles: Obstacles) {
-		const newRover = new Rover(
-			this.position.decreaseCoordinate(this.orientation.vector),
-			this.orientation
-		);
-		if (obstacles.isObstacleThere(newRover.position)) {
+	moveBackward() {
+		const newPosition = this.position.decrease(this.orientation.vector);
+
+		if (this.position.map.isObstacleThere(newPosition.point)) {
 			return this;
 		}
-		return newRover;
+
+		return new Rover(newPosition, this.orientation);
 	}
 
 	turnLeft() {

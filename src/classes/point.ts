@@ -1,5 +1,6 @@
 import mod from '../utils/computeModulo';
 
+// Objet de valeur
 class Point {
 	readonly x: number;
 	readonly y: number;
@@ -9,15 +10,15 @@ class Point {
 		this.y = y === -0 ? 0 : y;
 	}
 
-	addPoint(otherPoint: Point) {
+	add(otherPoint: Point) {
 		return new Point(this.x + otherPoint.x, this.y + otherPoint.y);
 	}
 
-	subtractPoint(otherPoint: Point) {
+	subtract(otherPoint: Point) {
 		return new Point(this.x - otherPoint.x, this.y - otherPoint.y);
 	}
 
-	moduloPoint(otherPoint: Point) {
+	modulo(otherPoint: Point) {
 		return new Point(mod(this.x, otherPoint.x), mod(this.y, otherPoint.y));
 	}
 }

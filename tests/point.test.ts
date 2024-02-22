@@ -11,17 +11,17 @@ describe('Point', () => {
 	});
 
 	test('should add two points', () => {
-		const result = point1.addPoint(point2);
+		const result = point1.add(point2);
 		expect(result).toStrictEqual(new Point(4, 6));
 	});
 
 	test('should subtract two points', () => {
-		const result = point2.subtractPoint(point1);
+		const result = point2.subtract(point1);
 		expect(result).toStrictEqual(new Point(2, 2));
 	});
 
 	test('should modulo two points', () => {
-		const result = point2.moduloPoint(point1);
+		const result = point2.modulo(point1);
 		expect(result).toStrictEqual(new Point(0, 0));
 	});
 });

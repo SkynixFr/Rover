@@ -1,10 +1,8 @@
 import Map from '../src/classes/map';
 import Point from '../src/classes/point';
-import Obstacles from '../src/classes/obstacles';
 import Orientation from '../src/classes/orientation';
 import Coordinate from '../src/classes/coordinate';
 import Rover from '../src/classes/rover';
-import Commands from '../src/classes/commands';
 
 describe('Rover', () => {
 	let initialPoint: Point;
@@ -12,31 +10,36 @@ describe('Rover', () => {
 	let initialCoordinate: Coordinate;
 	let initialOrientation: Orientation;
 	let rover: Rover;
-	let initialCommands: Commands;
-	let initialObstacles: Obstacles;
+	let rover2: Rover;
+	let rover3: Rover;
+	let initialObstacles: Point[];
 
 	beforeEach(() => {
 		initialPoint = new Point(10, 10);
-		map = new Map(initialPoint);
+		initialObstacles = [new Point(1, 5), new Point(15, 12)];
+		map = new Map(initialPoint, initialObstacles);
 		initialCoordinate = new Coordinate(new Point(0, 0), map);
 		initialOrientation = new Orientation(new Point(0, 1));
 		rover = new Rover(initialCoordinate, initialOrientation);
-		initialCommands = new Commands('frblf');
-		initialObstacles = new Obstacles([
-			new Coordinate(new Point(1, 5), map),
-			new Coordinate(new Point(15, 12), map)
-		]);
+		rover2 = new Rover(
+			new Coordinate(new Point(1, 4), map),
+			initialOrientation
+		);
+		rover3 = new Rover(
+			new Coordinate(new Point(1, 6), map),
+			initialOrientation
+		);
 	});
 
 	test('should move forward in the Y axis', () => {
-		const newRover = rover.moveForward(initialObstacles);
+		const newRover = rover.moveForward();
 		expect(newRover).toStrictEqual(
 			new Rover(new Coordinate(new Point(0, 1), map), initialOrientation)
 		);
 	});
 
 	test('should move backward in the Y axis', () => {
-		const newRover = rover.moveBackward(initialObstacles);
+		const newRover = rover.moveBackward();
 		expect(newRover).toStrictEqual(
 			new Rover(new Coordinate(new Point(0, 9), map), initialOrientation)
 		);
@@ -57,8 +60,7 @@ describe('Rover', () => {
 	});
 
 	test('should stop when it finds an obstacle, forward', () => {
-		rover.position = new Coordinate(new Point(1, 4), map);
-		const newRover = rover.moveForward(initialObstacles);
+		const newRover = rover2.moveForward();
 		expect(newRover).toStrictEqual(
 			new Rover(
 				new Coordinate(new Point(1, 4), map),
@@ -68,8 +70,7 @@ describe('Rover', () => {
 	});
 
 	test('should stop when it finds an obstacle, backward', () => {
-		rover.position = new Coordinate(new Point(1, 6), map);
-		const newRover = rover.moveBackward(initialObstacles);
+		const newRover = rover3.moveBackward();
 		expect(newRover).toStrictEqual(
 			new Rover(
 				new Coordinate(new Point(1, 6), map),
