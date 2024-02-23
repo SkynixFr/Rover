@@ -6,8 +6,8 @@ class Point {
 	readonly y: Integer;
 
 	constructor(x: Integer, y: Integer) {
-		this.x = x;
-		this.y = y;
+		this.x = x.normalize();
+		this.y = y.normalize();
 	}
 
 	add(otherPoint: Point) {
@@ -28,9 +28,16 @@ class Point {
 		);
 	}
 
-	// toOpposite() {
-	// 	return new Point(this.x.toOpposite(), this.y.toOpposite());
-	// }
+	scalarMultiply(otherPoint: Point) {
+		return new Point(
+			this.x.multiply(otherPoint.x),
+			this.y.multiply(otherPoint.y)
+		);
+	}
+
+	turnAround() {
+		return new Point(this.y, this.x);
+	}
 }
 
 export default Point;

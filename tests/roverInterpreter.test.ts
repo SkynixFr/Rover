@@ -11,6 +11,7 @@ import String from '../src/classes/types/string';
 describe('Commands', () => {
 	let commands1: String;
 	let commands2: String;
+	let commands3: String;
 	let rover: Rover;
 	let initialCoordinate: Coordinate;
 	let initialOrientation: Orientation;
@@ -32,6 +33,7 @@ describe('Commands', () => {
 		rover = new Rover(initialCoordinate, initialOrientation);
 		commands1 = new String('frbfl');
 		commands2 = new String('rflffffffff');
+		commands3 = new String('iu');
 	});
 
 	test('should execute the commands', () => {
@@ -49,6 +51,16 @@ describe('Commands', () => {
 		expect(rover).toStrictEqual(
 			new Rover(
 				new Coordinate(new Point(new Integer(1), new Integer(4)), map),
+				new Orientation(new Point(new Integer(0), new Integer(1)))
+			)
+		);
+	});
+
+	test("shouldn't execute the commands", () => {
+		rover = interpreter(commands3, rover);
+		expect(rover).toStrictEqual(
+			new Rover(
+				new Coordinate(new Point(new Integer(10), new Integer(10)), map),
 				new Orientation(new Point(new Integer(0), new Integer(1)))
 			)
 		);

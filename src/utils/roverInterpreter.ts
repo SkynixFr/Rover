@@ -4,6 +4,10 @@ import String from '../classes/types/string';
 export default function interpreter(commands: String, rover: Rover) {
 	let newRover: Rover = rover;
 
+	if (!commands.hasValidCharacters()) {
+		return rover;
+	}
+
 	for (const command of commands) {
 		if (command?.equals(new String('f'))) {
 			newRover = rover.moveForward();

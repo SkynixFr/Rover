@@ -26,8 +26,6 @@ describe('Map', () => {
 	});
 
 	test('should check if a point is an obstacle', () => {
-		console.log(obstacles);
-
 		const result = map.isObstacleThere(
 			new Point(new Integer(1), new Integer(5))
 		);

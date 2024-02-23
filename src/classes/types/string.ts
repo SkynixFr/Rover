@@ -13,6 +13,11 @@ class String {
 		return new String(Array.from(this.value).join(''));
 	}
 
+	hasValidCharacters() {
+		const regex = /^[fblr]+$/;
+		return regex.test(this.value);
+	}
+
 	[Symbol.iterator]() {
 		let index = 0;
 		const characters = this.value.split('');

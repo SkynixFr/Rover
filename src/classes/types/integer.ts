@@ -35,10 +35,6 @@ class Integer {
 		);
 	}
 
-	toOpposite() {
-		return new Integer(-this.value).normalize();
-	}
-
 	equal(otherInteger: Integer) {
 		return this.value === otherInteger.value;
 	}
