@@ -6,12 +6,12 @@ import Point from '../src/classes/point';
 import Map from '../src/classes/map';
 import PointList from '../src/classes/types/pointList';
 import Integer from '../src/classes/types/integer';
-import String from '../src/classes/types/string';
+import RoverCommand from '../src/classes/types/roverCommand';
 
 describe('Commands', () => {
-	let commands1: String;
-	let commands2: String;
-	let commands3: String;
+	let commands1: RoverCommand;
+	let commands2: RoverCommand;
+	let commands3: RoverCommand;
 	let rover: Rover;
 	let initialCoordinate: Coordinate;
 	let initialOrientation: Orientation;
@@ -31,9 +31,9 @@ describe('Commands', () => {
 			new Point(new Integer(0), new Integer(1))
 		);
 		rover = new Rover(initialCoordinate, initialOrientation);
-		commands1 = new String('frbfl');
-		commands2 = new String('rflffffffff');
-		commands3 = new String('iu');
+		commands1 = new RoverCommand('frbfl');
+		commands2 = new RoverCommand('rflffffffff');
+		commands3 = new RoverCommand('iu');
 	});
 
 	test('should execute the commands', () => {

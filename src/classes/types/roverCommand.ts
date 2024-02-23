@@ -1,16 +1,16 @@
-class String {
+class RoverCommand {
 	value: string;
 
 	constructor(value: string) {
 		this.value = value;
 	}
 
-	equals(otherString: String) {
+	equals(otherString: RoverCommand) {
 		return this.value === otherString.value;
 	}
 
 	iterator() {
-		return new String(Array.from(this.value).join(''));
+		return new RoverCommand(Array.from(this.value).join(''));
 	}
 
 	hasValidCharacters() {
@@ -26,7 +26,7 @@ class String {
 			next: () => {
 				if (index < characters.length) {
 					return {
-						value: new String(characters[index++].toLowerCase()),
+						value: new RoverCommand(characters[index++].toLowerCase()),
 						done: false
 					};
 				} else {
@@ -39,4 +39,4 @@ class String {
 	}
 }
 
-export default String;
+export default RoverCommand;

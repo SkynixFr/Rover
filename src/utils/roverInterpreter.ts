@@ -1,7 +1,7 @@
 import Rover from '../classes/rover';
-import String from '../classes/types/string';
+import RoverCommand from '../classes/types/roverCommand';
 
-export default function interpreter(commands: String, rover: Rover) {
+export default function interpreter(commands: RoverCommand, rover: Rover) {
 	let newRover: Rover = rover;
 
 	if (!commands.hasValidCharacters()) {
@@ -9,13 +9,13 @@ export default function interpreter(commands: String, rover: Rover) {
 	}
 
 	for (const command of commands) {
-		if (command?.equals(new String('f'))) {
+		if (command?.equals(new RoverCommand('f'))) {
 			newRover = rover.moveForward();
-		} else if (command?.equals(new String('b'))) {
+		} else if (command?.equals(new RoverCommand('b'))) {
 			newRover = rover.moveBackward();
-		} else if (command?.equals(new String('l'))) {
+		} else if (command?.equals(new RoverCommand('l'))) {
 			newRover = rover.turnLeft();
-		} else if (command?.equals(new String('r'))) {
+		} else if (command?.equals(new RoverCommand('r'))) {
 			newRover = rover.turnRight();
 		}
 
