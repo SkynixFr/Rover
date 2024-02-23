@@ -1,5 +1,6 @@
 import Point from './point';
 
+// Objet de valeur
 class Orientation {
 	vector: Point;
 

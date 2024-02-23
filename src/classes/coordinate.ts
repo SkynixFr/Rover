@@ -1,6 +1,7 @@
 import Map from './map';
 import Point from './point';
 
+// Objet de valeur
 class Coordinate {
 	readonly point: Point;
 	readonly map: Map;
@@ -10,12 +11,13 @@ class Coordinate {
 		this.point = map.normalizePoint(point);
 	}
 
-	increaseCoordinate(vector: Point) {
-		return new Coordinate(this.point.addPoint(vector), this.map);
+	increase(vector: Point) {
+		return new Coordinate(this.point.add(vector), this.map);
 	}
+	
 
-	decreaseCoordinate(vector: Point) {
-		return new Coordinate(this.point.subtractPoint(vector), this.map);
+	decrease(vector: Point) {
+		return new Coordinate(this.point.subtract(vector), this.map);
 	}
 }
 
