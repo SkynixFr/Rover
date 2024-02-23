@@ -4,34 +4,42 @@ import Coordinate from '../src/classes/coordinate';
 import Orientation from '../src/classes/orientation';
 import Point from '../src/classes/point';
 import Map from '../src/classes/map';
+import PointList from '../src/classes/types/pointList';
+import Integer from '../src/classes/types/integer';
+import String from '../src/classes/types/string';
 
 describe('Commands', () => {
-	let commands1: string;
-	let commands2: string;
+	let commands1: String;
+	let commands2: String;
 	let rover: Rover;
 	let initialCoordinate: Coordinate;
 	let initialOrientation: Orientation;
 	let initialPoint: Point;
 	let map: Map;
-	let initialObstacles: Point[];
+	let initialObstacles: PointList;
 
 	beforeEach(() => {
-		initialPoint = new Point(10, 10);
-		initialObstacles = [new Point(1, 5), new Point(15, 12)];
+		initialPoint = new Point(new Integer(10), new Integer(10));
+		initialObstacles = new PointList([
+			new Point(new Integer(1), new Integer(5)),
+			new Point(new Integer(12), new Integer(15))
+		]);
 		map = new Map(initialPoint, initialObstacles);
 		initialCoordinate = new Coordinate(initialPoint, map);
-		initialOrientation = new Orientation(new Point(0, 1));
+		initialOrientation = new Orientation(
+			new Point(new Integer(0), new Integer(1))
+		);
 		rover = new Rover(initialCoordinate, initialOrientation);
-		commands1 = 'frbfl';
-		commands2 = 'rflffffffff';
+		commands1 = new String('frbfl');
+		commands2 = new String('rflffffffff');
 	});
 
 	test('should execute the commands', () => {
 		rover = interpreter(commands1, rover);
 		expect(rover).toStrictEqual(
 			new Rover(
-				new Coordinate(new Point(0, 1), map),
-				new Orientation(new Point(0, 1))
+				new Coordinate(new Point(new Integer(0), new Integer(1)), map),
+				new Orientation(new Point(new Integer(0), new Integer(1)))
 			)
 		);
 	});
@@ -40,8 +48,8 @@ describe('Commands', () => {
 		rover = interpreter(commands2, rover);
 		expect(rover).toStrictEqual(
 			new Rover(
-				new Coordinate(new Point(1, 4), map),
-				new Orientation(new Point(0, 1))
+				new Coordinate(new Point(new Integer(1), new Integer(4)), map),
+				new Orientation(new Point(new Integer(0), new Integer(1)))
 			)
 		);
 	});

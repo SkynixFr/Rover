@@ -4,8 +4,8 @@ import Orientation from './orientation';
 
 // Objet de valeur
 class Rover {
-	position: Coordinate;
-	orientation: Orientation;
+	readonly position: Coordinate;
+	readonly orientation: Orientation;
 
 	constructor(position: Coordinate, orientation: Orientation) {
 		this.position = position;

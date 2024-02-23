@@ -1,16 +1,19 @@
 import Point from './point';
+import PointList from './types/pointList';
 
 // Objet de valeur
 class Map {
-	limit: Point;
-	obstacles: Point[];
+	readonly limit: Point;
+	readonly obstacles: PointList;
 
-	constructor(limit: Point, obstacles?: Point[]) {
+	constructor(limit: Point, obstacles?: PointList) {
 		this.limit = limit;
-		this.obstacles =
-			obstacles?.map(obstacle => {
+
+		this.obstacles = new PointList(
+			obstacles?.list.map(obstacle => {
 				return this.normalizePoint(obstacle);
-			}) || [];
+			}) || []
+		);
 	}
 
 	normalizePoint(point: Point) {
@@ -18,8 +21,8 @@ class Map {
 	}
 
 	isObstacleThere(point: Point) {
-		return this.obstacles.some(
-			obstacle => obstacle.x === point.x && obstacle.y === point.y
+		return this.obstacles.list.some(
+			obstacle => obstacle.x.equal(point.x) && obstacle.y.equal(point.y)
 		);
 	}
 }
