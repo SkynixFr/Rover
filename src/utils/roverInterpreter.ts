@@ -1,29 +1,32 @@
 import Rover from '../classes/rover';
-import RoverCommand from '../classes/types/roverCommand';
+import Integer from '../types/integer';
+import RoverCommand from '../types/roverCommand';
 
-export default function interpreter(commands: RoverCommand, rover: Rover) {
+export default function interpreteCommands(
+	commands: RoverCommand,
+	rover: Rover
+) {
 	let newRover: Rover = rover;
 
-	if (!commands.hasValidCharacters()) {
+	if (commands.length() === 0) {
 		return rover;
 	}
 
-	for (const command of commands) {
-		if (command?.equals(new RoverCommand('f'))) {
-			newRover = rover.moveForward();
-		} else if (command?.equals(new RoverCommand('b'))) {
-			newRover = rover.moveBackward();
-		} else if (command?.equals(new RoverCommand('l'))) {
-			newRover = rover.turnLeft();
-		} else if (command?.equals(new RoverCommand('r'))) {
-			newRover = rover.turnRight();
-		}
+	const command = commands.popLeft();
 
-		if (rover === newRover) {
-			break;
-		}
-
-		rover = newRover;
+	if (command.equals(new RoverCommand('f'))) {
+		newRover = rover.moveForward();
+	} else if (command.equals(new RoverCommand('b'))) {
+		newRover = rover.moveBackward();
+	} else if (command.equals(new RoverCommand('l'))) {
+		newRover = rover.turnLeft();
+	} else if (command.equals(new RoverCommand('r'))) {
+		newRover = rover.turnRight();
 	}
-	return rover;
+
+	if (rover === newRover) {
+		return rover;
+	}
+
+	return interpreteCommands(commands, newRover);
 }

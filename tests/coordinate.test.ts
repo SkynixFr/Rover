@@ -1,17 +1,17 @@
 import Map from '../src/classes/map';
 import Point from '../src/classes/point';
 import Coordinate from '../src/classes/coordinate';
-import Integer from '../src/classes/types/integer';
+import Integer from '../src/types/integer';
+import MapBuilder from './utils/mapBuilder';
+import CoordinateBuilder from './utils/coordinateBuilder';
 
 describe('Coordinate', () => {
-	let map: Map;
-	let initialPoint: Point;
 	let vector: Point;
 	let coordinate: Coordinate;
+	let map: Map;
 	beforeEach(() => {
-		initialPoint = new Point(new Integer(10), new Integer(10));
-		map = new Map(initialPoint);
-		coordinate = new Coordinate(initialPoint, map);
+		map = new MapBuilder().default();
+		coordinate = new CoordinateBuilder().default();
 		vector = new Point(new Integer(1), new Integer(2));
 	});
 

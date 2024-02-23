@@ -1,7 +1,7 @@
 import Point from '../src/classes/point';
 
 import { describe, expect, test } from '@jest/globals';
-import Integer from '../src/classes/types/integer';
+import Integer from '../src/types/integer';
 
 describe('Point', () => {
 	let point1: Point;

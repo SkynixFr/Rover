@@ -1,4 +1,4 @@
-import Point from '../point';
+import Point from '../classes/point';
 
 class PointList {
 	readonly list: Point[];

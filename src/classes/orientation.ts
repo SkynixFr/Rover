@@ -1,5 +1,5 @@
 import Point from './point';
-import Integer from './types/integer';
+import Integer from '../types/integer';
 // Objet de valeur
 class Orientation {
 	readonly vector: Point;

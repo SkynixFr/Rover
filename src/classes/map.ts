@@ -1,5 +1,6 @@
 import Point from './point';
-import PointList from './types/pointList';
+import PointList from '../types/pointList';
+import Boolean from '../types/boolean';
 
 // Objet de valeur
 class Map {
@@ -21,8 +22,10 @@ class Map {
 	}
 
 	isObstacleThere(point: Point) {
-		return this.obstacles.list.some(
-			obstacle => obstacle.x.equal(point.x) && obstacle.y.equal(point.y)
+		return new Boolean(
+			this.obstacles.list.some(
+				obstacle => obstacle.x.equal(point.x) && obstacle.y.equal(point.y)
+			)
 		);
 	}
 }

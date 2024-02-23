@@ -1,5 +1,5 @@
 import Coordinate from './coordinate';
-
+import Boolean from '../types/boolean';
 import Orientation from './orientation';
 
 // Objet de valeur
@@ -15,7 +15,7 @@ class Rover {
 	moveForward() {
 		const newPosition = this.position.increase(this.orientation.vector);
 
-		if (this.position.map.isObstacleThere(newPosition.point)) {
+		if (this.position.map.isObstacleThere(newPosition.point).type) {
 			return this;
 		}
 
@@ -25,7 +25,7 @@ class Rover {
 	moveBackward() {
 		const newPosition = this.position.decrease(this.orientation.vector);
 
-		if (this.position.map.isObstacleThere(newPosition.point)) {
+		if (this.position.map.isObstacleThere(newPosition.point).type) {
 			return this;
 		}
 
