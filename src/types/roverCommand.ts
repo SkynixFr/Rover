@@ -1,5 +1,3 @@
-import Integer from './integer';
-
 class RoverCommand {
 	value: string;
 

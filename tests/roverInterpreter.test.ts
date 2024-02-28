@@ -27,7 +27,10 @@ describe('Commands', () => {
 		initialCoordinate = new CoordinateBuilder()
 			.withMap(mapWithObstacles)
 			.build();
-		rover = new RoverBuilder().withCoordinate(initialCoordinate).build();
+		rover = new RoverBuilder()
+			.withMap(mapWithObstacles)
+			.withCoordinate(initialCoordinate)
+			.build();
 	});
 
 	test('should execute the commands', () => {
@@ -36,6 +39,7 @@ describe('Commands', () => {
 
 		expect(newRover).toStrictEqual(
 			new RoverBuilder()
+				.withMap(mapWithObstacles)
 				.withCoordinate(
 					new CoordinateBuilder()
 						.withPoint(new Point(new Integer(0), new Integer(1)))
@@ -51,6 +55,7 @@ describe('Commands', () => {
 		const newRover = InterpreteCommands(commands2, rover);
 		expect(newRover).toStrictEqual(
 			new RoverBuilder()
+				.withMap(mapWithObstacles)
 				.withCoordinate(
 					new CoordinateBuilder()
 						.withPoint(new Point(new Integer(1), new Integer(4)))

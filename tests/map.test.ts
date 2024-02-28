@@ -3,7 +3,6 @@ import Point from '../src/classes/point';
 import Integer from '../src/types/integer';
 import PointList from '../src/types/pointList';
 import MapBuilder from './utils/mapBuilder';
-import Boolean from '../src/types/boolean';
 
 describe('Map', () => {
 	let map: Map;
@@ -29,13 +28,13 @@ describe('Map', () => {
 			new Point(new Integer(1), new Integer(5))
 		);
 
-		expect(result).toStrictEqual(new Boolean(true));
+		expect(result).toStrictEqual(true);
 	});
 
 	test('should check if a point is not an obstacle', () => {
 		const result = map.isObstacleThere(
 			new Point(new Integer(10), new Integer(10))
 		);
-		expect(result).toStrictEqual(new Boolean(false));
+		expect(result).toStrictEqual(false);
 	});
 });

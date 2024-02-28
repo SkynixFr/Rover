@@ -7,9 +7,15 @@ class PointList {
 		this.list = list;
 	}
 
-	add(item: Point) {
-		this.list.push(item);
+	add(otherPoint: Point): PointList {
+		this.list.push(otherPoint);
 		return new PointList(this.list);
+	}
+
+	contains(otherPoint: Point): boolean {
+		return this.list.some(
+			point => point.x.equal(otherPoint.x) && point.y.equal(otherPoint.y)
+		);
 	}
 }
 

@@ -78,6 +78,7 @@ describe('Rover', () => {
 
 	test('should stop when it finds an obstacle, forward', () => {
 		const rover2 = new RoverBuilder()
+			.withMap(mapWithObstacles)
 			.withCoordinate(
 				new CoordinateBuilder()
 					.withPoint(new Point(new Integer(1), new Integer(4)))
@@ -91,6 +92,7 @@ describe('Rover', () => {
 
 	test('should stop when it finds an obstacle, backward', () => {
 		const rover3 = new RoverBuilder()
+			.withMap(mapWithObstacles)
 			.withCoordinate(
 				new CoordinateBuilder()
 					.withPoint(new Point(new Integer(1), new Integer(6)))

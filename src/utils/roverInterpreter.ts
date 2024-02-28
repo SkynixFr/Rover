@@ -1,5 +1,4 @@
 import Rover from '../classes/rover';
-import Integer from '../types/integer';
 import RoverCommand from '../types/roverCommand';
 
 export default function interpreteCommands(
@@ -14,19 +13,22 @@ export default function interpreteCommands(
 
 	const command = commands.popLeft();
 
-	if (command.equals(new RoverCommand('f'))) {
-		newRover = rover.moveForward();
-	} else if (command.equals(new RoverCommand('b'))) {
-		newRover = rover.moveBackward();
-	} else if (command.equals(new RoverCommand('l'))) {
-		newRover = rover.turnLeft();
-	} else if (command.equals(new RoverCommand('r'))) {
-		newRover = rover.turnRight();
-	}
-
-	if (rover === newRover) {
-		return rover;
-	}
+	newRover = interpreteCommand(command, rover);
 
 	return interpreteCommands(commands, newRover);
+}
+
+function interpreteCommand(command: RoverCommand, rover: Rover): Rover {
+	switch (command.value) {
+		case 'f':
+			return rover.moveForward();
+		case 'b':
+			return rover.moveBackward();
+		case 'l':
+			return rover.turnLeft();
+		case 'r':
+			return rover.turnRight();
+		default:
+			return rover;
+	}
 }
