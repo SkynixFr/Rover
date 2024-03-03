@@ -17,6 +17,14 @@ class PointList {
 			point => point.x.equal(otherPoint.x) && point.y.equal(otherPoint.y)
 		);
 	}
+
+	normalize(limit: Point): PointList {
+		return new PointList(
+			this.list.map(point => {
+				return point.modulo(limit);
+			})
+		);
+	}
 }
 
 export default PointList;

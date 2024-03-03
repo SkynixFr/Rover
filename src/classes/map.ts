@@ -8,12 +8,7 @@ class Map {
 
 	constructor(limit: Point, obstacles?: PointList) {
 		this.limit = limit;
-
-		this.obstacles = new PointList(
-			obstacles?.list.map(obstacle => {
-				return this.normalizePoint(obstacle);
-			}) || []
-		);
+		this.obstacles = obstacles?.normalize(limit) || new PointList([]);
 	}
 
 	normalizePoint(point: Point) {

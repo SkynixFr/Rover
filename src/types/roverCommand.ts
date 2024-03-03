@@ -1,5 +1,5 @@
 class RoverCommand {
-	value: string;
+	readonly value: string;
 
 	constructor(value: string) {
 		this.value = value
@@ -16,10 +16,10 @@ class RoverCommand {
 		return this.value.length;
 	}
 
-	popLeft() {
+	popLeft(): { char: RoverCommand; remaining: RoverCommand } {
 		const leftChar = new RoverCommand(this.value[0]);
-		this.value = this.value.slice(1);
-		return leftChar;
+		const remaining = new RoverCommand(this.value.slice(1));
+		return { char: leftChar, remaining: remaining };
 	}
 }
 

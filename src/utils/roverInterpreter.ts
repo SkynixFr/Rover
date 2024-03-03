@@ -11,9 +11,10 @@ export default function interpreteCommands(
 		return rover;
 	}
 
-	const command = commands.popLeft();
+	const { char, remaining } = commands.popLeft();
 
-	newRover = interpreteCommand(command, rover);
+	newRover = interpreteCommand(char, rover);
+	commands = remaining;
 
 	return interpreteCommands(commands, newRover);
 }
