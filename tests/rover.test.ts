@@ -7,6 +7,8 @@ import Integer from '../src/types/integer';
 import MapBuilder from './utils/mapBuilder';
 import RoverBuilder from './utils/roverBuilder';
 import CoordinateBuilder from './utils/coordinateBuilder';
+import Localisation from '../src/classes/localisation';
+import LocalisationBuilder from './utils/localisationBuilder';
 
 describe('Rover', () => {
 	let map: Map;
@@ -26,28 +28,36 @@ describe('Rover', () => {
 		rover = new RoverBuilder().default();
 	});
 
-	test('should move forward in the Y axis', () => {
+	test('should move forward', () => {
 		const newRover = rover.moveForward();
 		expect(newRover).toStrictEqual(
 			new RoverBuilder()
-				.withCoordinate(
-					new CoordinateBuilder()
-						.withPoint(new Point(new Integer(0), new Integer(1)))
-						.withMap(map)
+				.withLocalisation(
+					new LocalisationBuilder()
+						.withCoordinate(
+							new CoordinateBuilder()
+								.withPoint(new Point(new Integer(0), new Integer(1)))
+								.withMap(map)
+								.build()
+						)
 						.build()
 				)
 				.build()
 		);
 	});
 
-	test('should move backward in the Y axis', () => {
+	test('should move backward', () => {
 		const newRover = rover.moveBackward();
 		expect(newRover).toStrictEqual(
 			new RoverBuilder()
-				.withCoordinate(
-					new CoordinateBuilder()
-						.withPoint(new Point(new Integer(0), new Integer(-1)))
-						.withMap(map)
+				.withLocalisation(
+					new LocalisationBuilder()
+						.withCoordinate(
+							new CoordinateBuilder()
+								.withPoint(new Point(new Integer(0), new Integer(-1)))
+								.withMap(map)
+								.build()
+						)
 						.build()
 				)
 				.build()
@@ -58,8 +68,12 @@ describe('Rover', () => {
 		const newRover = rover.turnLeft();
 		expect(newRover).toStrictEqual(
 			new RoverBuilder()
-				.withOrientation(
-					new Orientation(new Point(new Integer(-1), new Integer(0)))
+				.withLocalisation(
+					new LocalisationBuilder()
+						.withOrientation(
+							new Orientation(new Point(new Integer(-1), new Integer(0)))
+						)
+						.build()
 				)
 				.build()
 		);
@@ -69,8 +83,12 @@ describe('Rover', () => {
 		const newRover = rover.turnRight();
 		expect(newRover).toStrictEqual(
 			new RoverBuilder()
-				.withOrientation(
-					new Orientation(new Point(new Integer(1), new Integer(0)))
+				.withLocalisation(
+					new LocalisationBuilder()
+						.withOrientation(
+							new Orientation(new Point(new Integer(1), new Integer(0)))
+						)
+						.build()
 				)
 				.build()
 		);
@@ -79,10 +97,14 @@ describe('Rover', () => {
 	test('should stop when it finds an obstacle, forward', () => {
 		const rover2 = new RoverBuilder()
 			.withMap(mapWithObstacles)
-			.withCoordinate(
-				new CoordinateBuilder()
-					.withPoint(new Point(new Integer(1), new Integer(4)))
-					.withMap(mapWithObstacles)
+			.withLocalisation(
+				new LocalisationBuilder()
+					.withCoordinate(
+						new CoordinateBuilder()
+							.withPoint(new Point(new Integer(1), new Integer(4)))
+							.withMap(mapWithObstacles)
+							.build()
+					)
 					.build()
 			)
 			.build();
@@ -93,10 +115,14 @@ describe('Rover', () => {
 	test('should stop when it finds an obstacle, backward', () => {
 		const rover3 = new RoverBuilder()
 			.withMap(mapWithObstacles)
-			.withCoordinate(
-				new CoordinateBuilder()
-					.withPoint(new Point(new Integer(1), new Integer(6)))
-					.withMap(mapWithObstacles)
+			.withLocalisation(
+				new LocalisationBuilder()
+					.withCoordinate(
+						new CoordinateBuilder()
+							.withPoint(new Point(new Integer(1), new Integer(6)))
+							.withMap(mapWithObstacles)
+							.build()
+					)
 					.build()
 			)
 			.build();

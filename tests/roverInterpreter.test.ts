@@ -9,6 +9,7 @@ import RoverCommand from '../src/types/roverCommand';
 import RoverBuilder from './utils/roverBuilder';
 import MapBuilder from './utils/mapBuilder';
 import CoordinateBuilder from './utils/coordinateBuilder';
+import LocalisationBuilder from './utils/localisationBuilder';
 
 describe('Commands', () => {
 	let rover: Rover;
@@ -29,7 +30,9 @@ describe('Commands', () => {
 			.build();
 		rover = new RoverBuilder()
 			.withMap(mapWithObstacles)
-			.withCoordinate(initialCoordinate)
+			.withLocalisation(
+				new LocalisationBuilder().withCoordinate(initialCoordinate).build()
+			)
 			.build();
 	});
 
@@ -40,10 +43,14 @@ describe('Commands', () => {
 		expect(newRover).toStrictEqual(
 			new RoverBuilder()
 				.withMap(mapWithObstacles)
-				.withCoordinate(
-					new CoordinateBuilder()
-						.withPoint(new Point(new Integer(0), new Integer(1)))
-						.withMap(mapWithObstacles)
+				.withLocalisation(
+					new LocalisationBuilder()
+						.withCoordinate(
+							new CoordinateBuilder()
+								.withPoint(new Point(new Integer(0), new Integer(1)))
+								.withMap(mapWithObstacles)
+								.build()
+						)
 						.build()
 				)
 				.build()
@@ -56,10 +63,14 @@ describe('Commands', () => {
 		expect(newRover).toStrictEqual(
 			new RoverBuilder()
 				.withMap(mapWithObstacles)
-				.withCoordinate(
-					new CoordinateBuilder()
-						.withPoint(new Point(new Integer(1), new Integer(4)))
-						.withMap(mapWithObstacles)
+				.withLocalisation(
+					new LocalisationBuilder()
+						.withCoordinate(
+							new CoordinateBuilder()
+								.withPoint(new Point(new Integer(1), new Integer(4)))
+								.withMap(mapWithObstacles)
+								.build()
+						)
 						.build()
 				)
 				.build()

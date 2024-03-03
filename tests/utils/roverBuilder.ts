@@ -1,17 +1,15 @@
 import Rover from '../../src/classes/rover';
-import CoordinateBuilder from './coordinateBuilder';
+
 import Coordinate from '../../src/classes/coordinate';
 import Orientation from '../../src/classes/orientation';
-import Integer from '../../src/types/integer';
-import Point from '../../src/classes/point';
+
 import MapBuilder from './mapBuilder';
 import Map from '../../src/classes/map';
+import Localisation from '../../src/classes/localisation';
+import LocalisationBuilder from './localisationBuilder';
 
 class RoverBuilder {
-	private coordinate: Coordinate = new CoordinateBuilder().default();
-	private orientation: Orientation = new Orientation(
-		new Point(new Integer(0), new Integer(1))
-	);
+	private localisation: Localisation = new LocalisationBuilder().default();
 	private map: Map = new MapBuilder().default();
 
 	default(): Rover {
@@ -19,16 +17,11 @@ class RoverBuilder {
 	}
 
 	build(): Rover {
-		return new Rover(this.coordinate, this.orientation, this.map);
+		return new Rover(this.localisation, this.map);
 	}
 
-	withCoordinate(coordinate: Coordinate): RoverBuilder {
-		this.coordinate = coordinate;
-		return this;
-	}
-
-	withOrientation(orientation: Orientation): RoverBuilder {
-		this.orientation = orientation;
+	withLocalisation(localisation: Localisation): RoverBuilder {
+		this.localisation = localisation;
 		return this;
 	}
 

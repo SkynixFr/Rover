@@ -8,6 +8,7 @@ describe('Map', () => {
 	let map: Map;
 	let otherPoint: Point;
 	let initialObstacles: PointList;
+	const callback = jest.fn();
 
 	beforeEach(() => {
 		initialObstacles = new PointList([
@@ -23,18 +24,18 @@ describe('Map', () => {
 		expect(result).toStrictEqual(new Point(new Integer(5), new Integer(2)));
 	});
 
-	test('should check if a point is an obstacle', () => {
-		const result = map.isObstacleThere(
-			new Point(new Integer(1), new Integer(5))
-		);
+	test('should not call callback when obstacle is present', () => {
+		map.isObstacleThere(new Point(new Integer(1), new Integer(5)), callback);
 
-		expect(result).toStrictEqual(true);
+		expect(callback).not.toHaveBeenCalled();
 	});
 
-	test('should check if a point is not an obstacle', () => {
-		const result = map.isObstacleThere(
-			new Point(new Integer(10), new Integer(10))
+	test('should call callback when no obstacle is present', () => {
+		map.isObstacleThere(
+			new Point(new Integer(10), new Integer(10)),
+			callback
 		);
-		expect(result).toStrictEqual(false);
+
+		expect(callback).toHaveBeenCalled();
 	});
 });

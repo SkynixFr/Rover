@@ -15,8 +15,11 @@ class Map {
 		return point.modulo(this.limit);
 	}
 
-	isObstacleThere(point: Point): boolean {
-		return this.obstacles.contains(this.normalizePoint(point));
+	isObstacleThere(point: Point, callback: () => void) {
+		const isObstacle = this.obstacles.contains(this.normalizePoint(point));
+		if (!isObstacle) {
+			callback();
+		}
 	}
 }
 
