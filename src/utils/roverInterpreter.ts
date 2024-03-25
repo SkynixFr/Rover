@@ -1,7 +1,7 @@
-import Rover from '../classes/rover';
+import Rover from '../domain/Rover';
 import RoverCommand from '../types/roverCommand';
 
-export default function interpreteCommands(
+export default function interpretCommands(
 	commands: RoverCommand,
 	rover: Rover
 ) {
@@ -13,13 +13,13 @@ export default function interpreteCommands(
 
 	const { char, remaining } = commands.popLeft();
 
-	newRover = interpreteCommand(char, rover);
+	newRover = interpretCommand(char, rover);
 	commands = remaining;
 
-	return interpreteCommands(commands, newRover);
+	return interpretCommands(commands, newRover);
 }
 
-function interpreteCommand(command: RoverCommand, rover: Rover): Rover {
+function interpretCommand(command: RoverCommand, rover: Rover): Rover {
 	switch (command.value) {
 		case 'f':
 			return rover.moveForward();
@@ -32,9 +32,5 @@ function interpreteCommand(command: RoverCommand, rover: Rover): Rover {
 		default:
 			return rover;
 	}
-<<<<<<< HEAD:server/src/utils/roverInterpreter.ts
-	return rover;
 }
-=======
-}
->>>>>>> 2d0a89d236c78d23924379a332bd18d176a408e7:src/utils/roverInterpreter.ts
+

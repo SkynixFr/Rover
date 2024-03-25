@@ -1,5 +1,5 @@
-import Map from '../classes/map';
-import Point from '../classes/point';
+import Map from '../domain/map';
+import Point from '../domain/point';
 import Integer from '../types/integer';
 import PointList from '../types/pointList';
 import MapBuilder from './utils/mapBuilder';

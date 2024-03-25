@@ -20,7 +20,7 @@ socket.on("connect", () => {
             rl.close();
         } else {
             // Assurez-vous que le serveur écoute sur l'événement correct
-            socket.emit("roverInterpreter", line);
+            socket.emit("RoverCommand", line);
             rl.prompt();
         }
     });
