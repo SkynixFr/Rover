@@ -1,43 +1,58 @@
-import Coordinate from './coordinate';
-
-import Orientation from './orientation';
+import Map from './map';
+import Localisation from './localisation';
 
 // Objet de valeur
 class Rover {
-	position: Coordinate;
-	orientation: Orientation;
+	readonly localisation: Localisation;
+	readonly map: Map;
 
-	constructor(position: Coordinate, orientation: Orientation) {
-		this.position = position;
-		this.orientation = orientation;
+	constructor(localisation: Localisation, map: Map) {
+		this.localisation = localisation;
+		this.map = map;
 	}
 
 	moveForward() {
-		const newPosition = this.position.increase(this.orientation.vector);
+		let newRover: Rover = this;
+		const newPosition = this.localisation.moveForward();
 
-		if (this.position.map.isObstacleThere(newPosition.point)) {
-			return this;
-		}
+		this.map.isObstacleThere(newPosition.point, () => {
+			newRover = new Rover(
+				new Localisation(newPosition, this.localisation.orientation),
+				this.map
+			);
+		});
 
-		return new Rover(newPosition, this.orientation);
+		return newRover;
 	}
 
 	moveBackward() {
-		const newPosition = this.position.decrease(this.orientation.vector);
+		let newRover: Rover = this;
+		const newPosition = this.localisation.moveBackward();
 
-		if (this.position.map.isObstacleThere(newPosition.point)) {
-			return this;
-		}
+		this.map.isObstacleThere(newPosition.point, () => {
+			newRover = new Rover(
+				new Localisation(newPosition, this.localisation.orientation),
+				this.map
+			);
+		});
 
-		return new Rover(newPosition, this.orientation);
+		return newRover;
 	}
 
 	turnLeft() {
-		return new Rover(this.position, this.orientation.turnLeft());
+		const newOrientation = this.localisation.turnLeft();
+		return new Rover(
+			new Localisation(this.localisation.position, newOrientation),
+			this.map
+		);
 	}
 
 	turnRight() {
-		return new Rover(this.position, this.orientation.turnRight());
+		const newOrientation = this.localisation.turnRight();
+		return new Rover(
+			new Localisation(this.localisation.position, newOrientation),
+			this.map
+		);
 	}
 }
 export default Rover;

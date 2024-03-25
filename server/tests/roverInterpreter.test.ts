@@ -1,48 +1,85 @@
-import interpreter from '../src/utils/roverInterpreter';
+import InterpreteCommands from '../src/utils/roverInterpreter';
 import Rover from '../src/classes/rover';
 import Coordinate from '../src/classes/coordinate';
-import Orientation from '../src/classes/orientation';
 import Point from '../src/classes/point';
 import Map from '../src/classes/map';
+import PointList from '../src/types/pointList';
+import Integer from '../src/types/integer';
+import RoverCommand from '../src/types/roverCommand';
+import RoverBuilder from './utils/roverBuilder';
+import MapBuilder from './utils/mapBuilder';
+import CoordinateBuilder from './utils/coordinateBuilder';
+import LocalisationBuilder from './utils/localisationBuilder';
 
 describe('Commands', () => {
-	let commands1: string;
-	let commands2: string;
 	let rover: Rover;
 	let initialCoordinate: Coordinate;
-	let initialOrientation: Orientation;
-	let initialPoint: Point;
-	let map: Map;
-	let initialObstacles: Point[];
+	let mapWithObstacles: Map;
+	let initialObstacles: PointList;
 
 	beforeEach(() => {
-		initialPoint = new Point(10, 10);
-		initialObstacles = [new Point(1, 5), new Point(15, 12)];
-		map = new Map(initialPoint, initialObstacles);
-		initialCoordinate = new Coordinate(initialPoint, map);
-		initialOrientation = new Orientation(new Point(0, 1));
-		rover = new Rover(initialCoordinate, initialOrientation);
-		commands1 = 'frbfl';
-		commands2 = 'rflffffffff';
+		initialObstacles = new PointList([
+			new Point(new Integer(1), new Integer(5)),
+			new Point(new Integer(12), new Integer(15))
+		]);
+		mapWithObstacles = new MapBuilder()
+			.withObstacles(initialObstacles)
+			.build();
+		initialCoordinate = new CoordinateBuilder()
+			.withMap(mapWithObstacles)
+			.build();
+		rover = new RoverBuilder()
+			.withMap(mapWithObstacles)
+			.withLocalisation(
+				new LocalisationBuilder().withCoordinate(initialCoordinate).build()
+			)
+			.build();
 	});
 
 	test('should execute the commands', () => {
-		rover = interpreter(commands1, rover);
-		expect(rover).toStrictEqual(
-			new Rover(
-				new Coordinate(new Point(0, 1), map),
-				new Orientation(new Point(0, 1))
-			)
+		let commands1 = new RoverCommand('frbfl');
+		const newRover = InterpreteCommands(commands1, rover);
+
+		expect(newRover).toStrictEqual(
+			new RoverBuilder()
+				.withMap(mapWithObstacles)
+				.withLocalisation(
+					new LocalisationBuilder()
+						.withCoordinate(
+							new CoordinateBuilder()
+								.withPoint(new Point(new Integer(0), new Integer(1)))
+								.withMap(mapWithObstacles)
+								.build()
+						)
+						.build()
+				)
+				.build()
 		);
 	});
 
 	test('should execute the commands and stop when it finds an obstacle', () => {
-		rover = interpreter(commands2, rover);
-		expect(rover).toStrictEqual(
-			new Rover(
-				new Coordinate(new Point(1, 4), map),
-				new Orientation(new Point(0, 1))
-			)
+		let commands2 = new RoverCommand('rflffffffff');
+		const newRover = InterpreteCommands(commands2, rover);
+		expect(newRover).toStrictEqual(
+			new RoverBuilder()
+				.withMap(mapWithObstacles)
+				.withLocalisation(
+					new LocalisationBuilder()
+						.withCoordinate(
+							new CoordinateBuilder()
+								.withPoint(new Point(new Integer(1), new Integer(4)))
+								.withMap(mapWithObstacles)
+								.build()
+						)
+						.build()
+				)
+				.build()
 		);
+	});
+
+	test("shouldn't execute the commands", () => {
+		let commands3 = new RoverCommand('i');
+		const newRover = InterpreteCommands(commands3, rover);
+		expect(newRover).toStrictEqual(rover);
 	});
 });

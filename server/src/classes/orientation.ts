@@ -1,19 +1,25 @@
 import Point from './point';
-
+import Integer from '../types/integer';
 // Objet de valeur
 class Orientation {
-	vector: Point;
+	readonly vector: Point;
 
 	constructor(vector: Point) {
 		this.vector = vector;
 	}
 
 	turnLeft() {
-		return new Orientation(new Point(-this.vector.y, this.vector.x));
+		const newPoint = this.vector.scalarMultiply(
+			new Point(new Integer(1), new Integer(-1))
+		);
+		return new Orientation(newPoint.turnAround());
 	}
 
 	turnRight() {
-		return new Orientation(new Point(this.vector.y, -this.vector.x));
+		const newPoint = this.vector.scalarMultiply(
+			new Point(new Integer(-1), new Integer(1))
+		);
+		return new Orientation(newPoint.turnAround());
 	}
 }
 

@@ -1,32 +1,41 @@
-import Coordinate from '../src/classes/coordinate';
 import Map from '../src/classes/map';
 import Point from '../src/classes/point';
+import Integer from '../src/types/integer';
+import PointList from '../src/types/pointList';
+import MapBuilder from './utils/mapBuilder';
 
 describe('Map', () => {
 	let map: Map;
-	let initialPoint: Point;
 	let otherPoint: Point;
-	let obstacles: Point[];
+	let initialObstacles: PointList;
+	const callback = jest.fn();
 
 	beforeEach(() => {
-		initialPoint = new Point(10, 10);
-		obstacles = [new Point(1, 5), new Point(12, 15)];
-		map = new Map(initialPoint, obstacles);
-		otherPoint = new Point(5, 2);
+		initialObstacles = new PointList([
+			new Point(new Integer(1), new Integer(5)),
+			new Point(new Integer(12), new Integer(15))
+		]);
+		map = new MapBuilder().withObstacles(initialObstacles).build();
+		otherPoint = new Point(new Integer(15), new Integer(12));
 	});
 
 	test('should normalize a point', () => {
 		const result = map.normalizePoint(otherPoint);
-		expect(result).toStrictEqual(new Point(5, 2));
+		expect(result).toStrictEqual(new Point(new Integer(5), new Integer(2)));
 	});
 
-	test('should check if a point is an obstacle', () => {
-		const result = map.isObstacleThere(new Point(1, 5));
-		expect(result).toStrictEqual(true);
+	test('should not call callback when obstacle is present', () => {
+		map.isObstacleThere(new Point(new Integer(1), new Integer(5)), callback);
+
+		expect(callback).not.toHaveBeenCalled();
 	});
 
-	test('should check if a point is not an obstacle', () => {
-		const result = map.isObstacleThere(new Point(10, 10));
-		expect(result).toStrictEqual(false);
+	test('should call callback when no obstacle is present', () => {
+		map.isObstacleThere(
+			new Point(new Integer(10), new Integer(10)),
+			callback
+		);
+
+		expect(callback).toHaveBeenCalled();
 	});
 });

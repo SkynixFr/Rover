@@ -1,81 +1,132 @@
 import Map from '../src/classes/map';
 import Point from '../src/classes/point';
 import Orientation from '../src/classes/orientation';
-import Coordinate from '../src/classes/coordinate';
 import Rover from '../src/classes/rover';
+import PointList from '../src/types/pointList';
+import Integer from '../src/types/integer';
+import MapBuilder from './utils/mapBuilder';
+import RoverBuilder from './utils/roverBuilder';
+import CoordinateBuilder from './utils/coordinateBuilder';
+import Localisation from '../src/classes/localisation';
+import LocalisationBuilder from './utils/localisationBuilder';
 
 describe('Rover', () => {
-	let initialPoint: Point;
 	let map: Map;
-	let initialCoordinate: Coordinate;
-	let initialOrientation: Orientation;
+	let mapWithObstacles: Map;
+	let initialObstacles: PointList;
 	let rover: Rover;
-	let rover2: Rover;
-	let rover3: Rover;
-	let initialObstacles: Point[];
 
 	beforeEach(() => {
-		initialPoint = new Point(10, 10);
-		initialObstacles = [new Point(1, 5), new Point(15, 12)];
-		map = new Map(initialPoint, initialObstacles);
-		initialCoordinate = new Coordinate(new Point(0, 0), map);
-		initialOrientation = new Orientation(new Point(0, 1));
-		rover = new Rover(initialCoordinate, initialOrientation);
-		rover2 = new Rover(
-			new Coordinate(new Point(1, 4), map),
-			initialOrientation
-		);
-		rover3 = new Rover(
-			new Coordinate(new Point(1, 6), map),
-			initialOrientation
-		);
+		initialObstacles = new PointList([
+			new Point(new Integer(1), new Integer(5)),
+			new Point(new Integer(12), new Integer(15))
+		]);
+		map = new MapBuilder().default();
+		mapWithObstacles = new MapBuilder()
+			.withObstacles(initialObstacles)
+			.build();
+		rover = new RoverBuilder().default();
 	});
 
-	test('should move forward in the Y axis', () => {
+	test('should move forward', () => {
 		const newRover = rover.moveForward();
 		expect(newRover).toStrictEqual(
-			new Rover(new Coordinate(new Point(0, 1), map), initialOrientation)
+			new RoverBuilder()
+				.withLocalisation(
+					new LocalisationBuilder()
+						.withCoordinate(
+							new CoordinateBuilder()
+								.withPoint(new Point(new Integer(0), new Integer(1)))
+								.withMap(map)
+								.build()
+						)
+						.build()
+				)
+				.build()
 		);
 	});
 
-	test('should move backward in the Y axis', () => {
+	test('should move backward', () => {
 		const newRover = rover.moveBackward();
 		expect(newRover).toStrictEqual(
-			new Rover(new Coordinate(new Point(0, 9), map), initialOrientation)
+			new RoverBuilder()
+				.withLocalisation(
+					new LocalisationBuilder()
+						.withCoordinate(
+							new CoordinateBuilder()
+								.withPoint(new Point(new Integer(0), new Integer(-1)))
+								.withMap(map)
+								.build()
+						)
+						.build()
+				)
+				.build()
 		);
 	});
 
 	test('should turn left', () => {
 		const newRover = rover.turnLeft();
 		expect(newRover).toStrictEqual(
-			new Rover(initialCoordinate, new Orientation(new Point(-1, 0)))
+			new RoverBuilder()
+				.withLocalisation(
+					new LocalisationBuilder()
+						.withOrientation(
+							new Orientation(new Point(new Integer(-1), new Integer(0)))
+						)
+						.build()
+				)
+				.build()
 		);
 	});
 
 	test('should turn right', () => {
 		const newRover = rover.turnRight();
 		expect(newRover).toStrictEqual(
-			new Rover(initialCoordinate, new Orientation(new Point(1, 0)))
+			new RoverBuilder()
+				.withLocalisation(
+					new LocalisationBuilder()
+						.withOrientation(
+							new Orientation(new Point(new Integer(1), new Integer(0)))
+						)
+						.build()
+				)
+				.build()
 		);
 	});
 
 	test('should stop when it finds an obstacle, forward', () => {
-		const newRover = rover2.moveForward();
-		expect(newRover).toStrictEqual(
-			new Rover(
-				new Coordinate(new Point(1, 4), map),
-				new Orientation(new Point(0, 1))
+		const rover2 = new RoverBuilder()
+			.withMap(mapWithObstacles)
+			.withLocalisation(
+				new LocalisationBuilder()
+					.withCoordinate(
+						new CoordinateBuilder()
+							.withPoint(new Point(new Integer(1), new Integer(4)))
+							.withMap(mapWithObstacles)
+							.build()
+					)
+					.build()
 			)
-		);
+			.build();
+		const newRover = rover2.moveForward();
+		expect(newRover).toStrictEqual(rover2);
 	});
 
 	test('should stop when it finds an obstacle, backward', () => {
-		const newRover = rover3.moveBackward();
-		expect(newRover).toStrictEqual(
-			new Rover(
-				new Coordinate(new Point(1, 6), map),
-				new Orientation(new Point(0, 1))
+		const rover3 = new RoverBuilder()
+			.withMap(mapWithObstacles)
+			.withLocalisation(
+				new LocalisationBuilder()
+					.withCoordinate(
+						new CoordinateBuilder()
+							.withPoint(new Point(new Integer(1), new Integer(6)))
+							.withMap(mapWithObstacles)
+							.build()
+					)
+					.build()
 			)
-		);
+			.build();
+		const newRover = rover3.moveBackward();
+		expect(newRover).toStrictEqual(rover3);
 	});
 });

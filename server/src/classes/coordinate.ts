@@ -14,7 +14,6 @@ class Coordinate {
 	increase(vector: Point) {
 		return new Coordinate(this.point.add(vector), this.map);
 	}
-	
 
 	decrease(vector: Point) {
 		return new Coordinate(this.point.subtract(vector), this.map);

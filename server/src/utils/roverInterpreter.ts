@@ -1,23 +1,40 @@
 import Rover from '../classes/rover';
+import RoverCommand from '../types/roverCommand';
 
-export default function interpreter(commands: string, rover: Rover) {
+export default function interpreteCommands(
+	commands: RoverCommand,
+	rover: Rover
+) {
 	let newRover: Rover = rover;
-	for (const command of commands) {
-		if (command === 'f') {
-			newRover = rover.moveForward();
-		} else if (command === 'b') {
-			newRover = rover.moveBackward();
-		} else if (command === 'l') {
-			newRover = rover.turnLeft();
-		} else if (command === 'r') {
-			newRover = rover.turnRight();
-		}
 
-		if (rover != newRover) {
-			rover = newRover;
-		} else {
-			break;
-		}
+	if (commands.length() === 0) {
+		return rover;
 	}
+
+	const { char, remaining } = commands.popLeft();
+
+	newRover = interpreteCommand(char, rover);
+	commands = remaining;
+
+	return interpreteCommands(commands, newRover);
+}
+
+function interpreteCommand(command: RoverCommand, rover: Rover): Rover {
+	switch (command.value) {
+		case 'f':
+			return rover.moveForward();
+		case 'b':
+			return rover.moveBackward();
+		case 'l':
+			return rover.turnLeft();
+		case 'r':
+			return rover.turnRight();
+		default:
+			return rover;
+	}
+<<<<<<< HEAD:server/src/utils/roverInterpreter.ts
 	return rover;
 }
+=======
+}
+>>>>>>> 2d0a89d236c78d23924379a332bd18d176a408e7:src/utils/roverInterpreter.ts
