@@ -1,5 +1,5 @@
-import Point from '../src/classes/point';
-import Orientation from '../src/classes/orientation';
+import Point from '../src/domain/point';
+import Orientation from '../src/domain/orientation';
 import Integer from '../src/types/integer';
 
 describe('Orientation', () => {

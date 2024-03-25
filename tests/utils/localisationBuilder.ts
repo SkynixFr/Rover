@@ -1,7 +1,7 @@
-import Coordinate from '../../src/classes/coordinate';
-import Localisation from '../../src/classes/localisation';
-import Orientation from '../../src/classes/orientation';
-import Point from '../../src/classes/point';
+import Coordinate from '../../src/domain/coordinate';
+import Localisation from '../../src/domain/localisation';
+import Orientation from '../../src/domain/orientation';
+import Point from '../../src/domain/point';
 import Integer from '../../src/types/integer';
 import CoordinateBuilder from './coordinateBuilder';
 

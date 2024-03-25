@@ -1,4 +1,4 @@
-import Point from '../src/classes/point';
+import Point from '../src/domain/point';
 
 import { describe, expect, test } from '@jest/globals';
 import Integer from '../src/types/integer';

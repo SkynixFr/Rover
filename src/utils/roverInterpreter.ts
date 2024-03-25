@@ -1,4 +1,4 @@
-import Rover from '../classes/rover';
+import Rover from '../domain/rover';
 import RoverCommand from '../types/roverCommand';
 
 export default function interpreteCommands(

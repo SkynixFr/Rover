@@ -1,11 +1,11 @@
-import Rover from '../../src/classes/rover';
+import Rover from '../../src/domain/rover';
 
-import Coordinate from '../../src/classes/coordinate';
-import Orientation from '../../src/classes/orientation';
+import Coordinate from '../../src/domain/coordinate';
+import Orientation from '../../src/domain/orientation';
 
 import MapBuilder from './mapBuilder';
-import Map from '../../src/classes/map';
-import Localisation from '../../src/classes/localisation';
+import Map from '../../src/domain/map';
+import Localisation from '../../src/domain/localisation';
 import LocalisationBuilder from './localisationBuilder';
 
 class RoverBuilder {

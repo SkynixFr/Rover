@@ -1,6 +1,6 @@
-import Coordinate from '../../src/classes/coordinate';
-import Map from '../../src/classes/map';
-import Point from '../../src/classes/point';
+import Coordinate from '../../src/domain/coordinate';
+import Map from '../../src/domain/map';
+import Point from '../../src/domain/point';
 import Integer from '../../src/types/integer';
 import MapBuilder from './mapBuilder';
 
