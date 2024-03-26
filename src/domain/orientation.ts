@@ -8,14 +8,14 @@ class Orientation {
 		this.vector = vector;
 	}
 
-	turnLeft() {
+	turnClockwise() {
 		const newPoint = this.vector.scalarMultiply(
 			new Point(new Integer(1), new Integer(-1))
 		);
 		return new Orientation(newPoint.turnAround());
 	}
 
-	turnRight() {
+	turnAntiClockwise() {
 		const newPoint = this.vector.scalarMultiply(
 			new Point(new Integer(-1), new Integer(1))
 		);

@@ -26,9 +26,9 @@ function interpreteCommand(command: RoverCommand, rover: Rover): Rover {
 		case 'b':
 			return rover.moveBackward();
 		case 'l':
-			return rover.turnLeft();
+			return rover.turnClockwise();
 		case 'r':
-			return rover.turnRight();
+			return rover.turnAntiClockwise();
 		default:
 			return rover;
 	}

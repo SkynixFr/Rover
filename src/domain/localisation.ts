@@ -20,13 +20,13 @@ class Localisation {
 		return newLocalisation;
 	}
 
-	turnLeft() {
-		const newLocalisation = new Localisation(this.position, this.orientation.turnLeft())
+	turnClockwise() {
+		const newLocalisation = new Localisation(this.position, this.orientation.turnClockwise())
 		return newLocalisation;
 	}
 
-	turnRight() {
-		const newLocalisation = new Localisation(this.position, this.orientation.turnRight())
+	turnAntiClockwise() {
+		const newLocalisation = new Localisation(this.position, this.orientation.turnAntiClockwise())
 		return newLocalisation;
 	}
 

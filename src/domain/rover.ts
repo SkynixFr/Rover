@@ -39,16 +39,16 @@ class Rover {
 		return newRover;
 	}
 
-	turnLeft() {
-		const newLocalisation = this.localisation.turnLeft();
+	turnClockwise() {
+		const newLocalisation = this.localisation.turnClockwise();
 		return new Rover(
 			newLocalisation,
 			this.map
 		);
 	}
 
-	turnRight() {
-		const newLocalisation = this.localisation.turnRight();
+	turnAntiClockwise() {
+		const newLocalisation = this.localisation.turnAntiClockwise();
 		return new Rover(
 			newLocalisation,
 			this.map

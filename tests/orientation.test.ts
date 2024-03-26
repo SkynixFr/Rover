@@ -11,14 +11,14 @@ describe('Orientation', () => {
 	});
 
 	test('should turn left', () => {
-		const result = orientation.turnLeft();
+		const result = orientation.turnClockwise();
 		expect(result).toStrictEqual(
 			new Orientation(new Point(new Integer(-1), new Integer(0)))
 		);
 	});
 
 	test('should turn right', () => {
-		const result = orientation.turnRight();
+		const result = orientation.turnAntiClockwise();
 		expect(result).toStrictEqual(
 			new Orientation(new Point(new Integer(1), new Integer(0)))
 		);

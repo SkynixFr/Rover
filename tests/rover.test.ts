@@ -65,7 +65,7 @@ describe('Rover', () => {
 	});
 
 	test('should turn left', () => {
-		const newRover = rover.turnLeft();
+		const newRover = rover.turnClockwise();
 		expect(newRover).toStrictEqual(
 			new RoverBuilder()
 				.withLocalisation(
@@ -80,7 +80,7 @@ describe('Rover', () => {
 	});
 
 	test('should turn right', () => {
-		const newRover = rover.turnRight();
+		const newRover = rover.turnAntiClockwise();
 		expect(newRover).toStrictEqual(
 			new RoverBuilder()
 				.withLocalisation(

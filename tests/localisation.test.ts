@@ -41,7 +41,7 @@ describe('Localisation', () => {
 	});
 
 	test('should turn left', () => {
-		const newLocalisation = localisation.turnLeft();
+		const newLocalisation = localisation.turnClockwise();
         const testLocalisation = new Localisation(
             position,
             new Orientation(new Point(new Integer(-1), new Integer(0))))
@@ -51,7 +51,7 @@ describe('Localisation', () => {
 	});
 
     test('should turn right', () => {
-		const newLocalisation = localisation.turnRight();
+		const newLocalisation = localisation.turnAntiClockwise();
         const testLocalisation = new Localisation(
             position,
             new Orientation(new Point(new Integer(1), new Integer(0))))
