@@ -17,6 +17,9 @@ class Map {
 
 	isObstacleThere(point: Point, callback: () => void) {
 		const isObstacle = this.obstacles.contains(this.normalizePoint(point));
+		console.log(this.obstacles)
+		console.log(this.normalizePoint(point))
+		console.log(isObstacle)
 		if (!isObstacle) {
 			callback();
 		}

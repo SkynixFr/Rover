@@ -1,6 +1,5 @@
 import { io } from "socket.io-client";
 import readline from "readline";
-import RoverCommand from "./src/types/roverCommand";
 
 const socket = io("http://localhost:3001");
 
