@@ -7,7 +7,7 @@ export default function interpreteCommands(
 ) {
 	let newRover: Rover = rover;
 
-	if (commands.length() === 0) {
+	if (commands.lengthof() === 0) {
 		return rover;
 	}
 

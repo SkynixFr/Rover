@@ -21,6 +21,10 @@ class Orientation {
 		);
 		return new Orientation(newPoint.turnAround());
 	}
+
+	display() {
+		return `(${this.vector.x.display()}, ${this.vector.y.display()})`;
+	}
 }
 
 export default Orientation;

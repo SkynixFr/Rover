@@ -1,5 +1,6 @@
 import { io } from "socket.io-client";
 import readline from "readline";
+import RoverCommand from "./src/types/roverCommand";
 
 const socket = io("http://localhost:3001");
 
@@ -11,7 +12,7 @@ const rl = readline.createInterface({
 socket.on("connect", () => {
     console.log("Connected to the server.");
 
-    rl.setPrompt('Enter command (f, b, l, r) or "exit" to quit: ');
+    rl.setPrompt('Enter a sequence of commands containing (f, b, l, r) or "exit" to quit: ');
     rl.prompt();
 
     rl.on("line", (line) => {

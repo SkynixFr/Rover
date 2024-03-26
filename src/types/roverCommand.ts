@@ -12,7 +12,7 @@ class RoverCommand {
 		return this.value === otherString.value;
 	}
 
-	length() {
+	lengthof() {
 		return this.value.length;
 	}
 
@@ -20,6 +20,10 @@ class RoverCommand {
 		const leftChar = new RoverCommand(this.value[0]);
 		const remaining = new RoverCommand(this.value.slice(1));
 		return { char: leftChar, remaining: remaining };
+	}
+
+	display() {
+		return this.value;
 	}
 }
 

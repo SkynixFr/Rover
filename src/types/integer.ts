@@ -38,6 +38,10 @@ class Integer {
 	equal(otherInteger: Integer) {
 		return this.value === otherInteger.value;
 	}
+
+	display() {
+		return `${this.value}`;
+	}
 }
 
 export default Integer;

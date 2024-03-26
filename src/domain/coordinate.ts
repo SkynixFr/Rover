@@ -18,6 +18,10 @@ class Coordinate {
 	decrease(vector: Point) {
 		return new Coordinate(this.point.subtract(vector), this.map);
 	}
+
+	display() {
+		return `(${this.point.x.display()}, ${this.point.y.display()})`;
+	}
 }
 
 export default Coordinate;

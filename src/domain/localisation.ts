@@ -25,6 +25,10 @@ class Localisation {
 	turnRight() {
 		return this.position, this.orientation.turnRight();
 	}
+
+	display() {
+		return `(position: ${this.position.display()}, orientation: ${this.orientation.display()})`;
+	}
 }
 
 export default Localisation;
