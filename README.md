@@ -1,5 +1,5 @@
 
-Déplace ton petit Rover sur Mars. Attention aux obstacles !
+Déplace ton Rover sur Mars. Attention aux obstacles !
 
 
 ## Stack
