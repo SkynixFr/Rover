@@ -1,7 +1,7 @@
 import  Rover  from "../domain/rover";
-import interpretCommands from "../utils/roverInterpreter";
+import interpretCommands from "../domain/roverInterpreter";
 import Map from "../domain/map";
-import RoverCommand from "../types/roverCommand";
+import RoverCommand from "../domain/roverCommand";
 
 class RoverController {
     private readonly map: Map;

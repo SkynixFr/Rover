@@ -2,7 +2,7 @@ import express from 'express';
 import http from 'http';
 import { Server } from 'socket.io';
 import RoverController from './missionControl/roverController';
-import RoverCommand from './types/roverCommand';
+import RoverCommand from './domain/roverCommand';
 import { mapWithObstacles, rover } from './mapForMission';
 
 const app = express();
@@ -17,11 +17,12 @@ io.on('connection', (socket) => {
     console.log(`Client connected: ${socket.id}`);
 
     socket.on('roverCommand', (commandString) => {
-        console.log(mapWithObstacles.obstacles.list)
+
         const roverCommand = new RoverCommand(commandString)
         console.log(`Received command for rover: ${roverCommand.display()}`);
+
         const newRover = roverController.executeCommand(roverCommand);
-        console.log(`New Rover position: `, newRover.localisation.display());
+        console.log(`The new position of the rover is:`, newRover.localisation.display(), `\n`);
     });
 
     socket.on('disconnect', () => {

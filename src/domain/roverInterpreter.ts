@@ -1,5 +1,5 @@
-import Rover from '../domain/rover';
-import RoverCommand from '../types/roverCommand';
+import Rover from './rover';
+import RoverCommand from './roverCommand';
 
 export default function interpreteCommands(
 	commands: RoverCommand,
