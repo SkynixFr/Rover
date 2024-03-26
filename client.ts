@@ -19,8 +19,7 @@ socket.on("connect", () => {
             socket.disconnect();
             rl.close();
         } else {
-            // Assurez-vous que le serveur écoute sur l'événement correct
-            socket.emit("RoverCommand", line);
+            socket.emit("roverCommand", line);
             rl.prompt();
         }
     });
