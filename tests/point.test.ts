@@ -25,4 +25,14 @@ describe('Point', () => {
 		const result = point2.modulo(point1);
 		expect(result).toStrictEqual(new Point(new Integer(0), new Integer(0)));
 	});
+
+	test('should scalar multiply two points', () => {
+		const result = point2.scalarMultiply(point1);
+		expect(result).toStrictEqual(new Point(new Integer(3), new Integer(8)));
+	});
+
+	test('should turn around a point', () => {
+		const result = point1.turnAround();
+		expect(result).toStrictEqual(new Point(new Integer(2), new Integer(1)));
+	});
 });

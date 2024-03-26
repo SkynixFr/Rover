@@ -11,19 +11,23 @@ class Localisation {
 	}
 
 	moveForward() {
-		return this.position.increase(this.orientation.vector);
+		const newLocalisation = new Localisation(this.position.increase(this.orientation.vector), this.orientation)
+		return newLocalisation;
 	}
 
 	moveBackward() {
-		return this.position.decrease(this.orientation.vector);
+		const newLocalisation = new Localisation(this.position.decrease(this.orientation.vector), this.orientation)
+		return newLocalisation;
 	}
 
 	turnLeft() {
-		return this.position, this.orientation.turnLeft();
+		const newLocalisation = new Localisation(this.position, this.orientation.turnLeft())
+		return newLocalisation;
 	}
 
 	turnRight() {
-		return this.position, this.orientation.turnRight();
+		const newLocalisation = new Localisation(this.position, this.orientation.turnRight())
+		return newLocalisation;
 	}
 
 	display() {

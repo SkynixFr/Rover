@@ -23,4 +23,9 @@ describe('Orientation', () => {
 			new Orientation(new Point(new Integer(1), new Integer(0)))
 		);
 	});
+	test('should display the orientation', () => {
+		expect(orientation.display()).toStrictEqual(
+			`(0, 1)`
+		);
+	});	
 });

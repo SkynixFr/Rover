@@ -13,11 +13,11 @@ class Rover {
 
 	moveForward() {
 		let newRover: Rover = this;
-		const newPosition = this.localisation.moveForward();
+		const newLocalisation = this.localisation.moveForward();
 
-		this.map.isObstacleThere(newPosition.point, () => {
+		this.map.isObstacleThere(newLocalisation.position.point, () => {
 			newRover = new Rover(
-				new Localisation(newPosition, this.localisation.orientation),
+				newLocalisation,
 				this.map
 			);
 		});
@@ -27,11 +27,11 @@ class Rover {
 
 	moveBackward() {
 		let newRover: Rover = this;
-		const newPosition = this.localisation.moveBackward();
+		const newLocalisation = this.localisation.moveBackward();
 
-		this.map.isObstacleThere(newPosition.point, () => {
+		this.map.isObstacleThere(newLocalisation.position.point, () => {
 			newRover = new Rover(
-				new Localisation(newPosition, this.localisation.orientation),
+				newLocalisation,
 				this.map
 			);
 		});
@@ -40,17 +40,17 @@ class Rover {
 	}
 
 	turnLeft() {
-		const newOrientation = this.localisation.turnLeft();
+		const newLocalisation = this.localisation.turnLeft();
 		return new Rover(
-			new Localisation(this.localisation.position, newOrientation),
+			newLocalisation,
 			this.map
 		);
 	}
 
 	turnRight() {
-		const newOrientation = this.localisation.turnRight();
+		const newLocalisation = this.localisation.turnRight();
 		return new Rover(
-			new Localisation(this.localisation.position, newOrientation),
+			newLocalisation,
 			this.map
 		);
 	}

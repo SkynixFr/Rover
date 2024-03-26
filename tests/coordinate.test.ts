@@ -28,4 +28,10 @@ describe('Coordinate', () => {
 			new Coordinate(new Point(new Integer(9), new Integer(8)), map)
 		);
 	});
+
+	test('should display the coordinate', () => {
+		expect(coordinate.display()).toStrictEqual(
+			`(0, 0)`
+		);
+	});	
 });
