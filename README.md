@@ -4,9 +4,9 @@ Déplace ton petit Rover sur Mars. Attention aux obstacles !
 
 ## Stack
 
--  ![typescript](https://img.shields.io/badge/typescript-5.1.6-blue.svg)
--  ![express](https://img.shields.io/badge/express-4.18.2-blue.svg)
--  ![nodejs](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
+-  ![typescript](https://img.shields.io/badge/typescript-5.3.3-blue.svg)
+-  ![express](https://img.shields.io/badge/express-4.19.2-blue.svg)
+-  ![nodejs](https://img.shields.io/badge/Node.js-21.7.1-blue.svg)
 
 
 ## Setup
