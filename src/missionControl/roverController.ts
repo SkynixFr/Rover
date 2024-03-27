@@ -1,21 +1,46 @@
 import  Rover  from "../domain/rover";
-import interpretCommands from "../domain/roverInterpreter";
 import Map from "../domain/map";
 import RoverCommand from "../domain/roverCommand";
 
+
 class RoverController {
     private readonly map: Map;
-    private rover: Rover;
 
-    public constructor(map: Map,
-                       rover: Rover) {
+    public constructor(map: Map) {
         this.map = map;
-        this.rover = rover;
     }
 
-    public executeCommand(roverCommand: RoverCommand): Rover {
-        this.rover = interpretCommands(roverCommand, this.rover);
-        return this.rover;
+    public interpretCommands(
+        commands: RoverCommand,
+        rover: Rover
+    ): Rover {
+        let newRover: Rover = rover;
+    
+        if (commands.lengthof() === 0) {
+            return rover;
+        }
+    
+        const { char, remaining } = commands.popLeft();
+    
+        newRover = this.interpretCommand(char, rover);
+        commands = remaining;
+    
+        return this.interpretCommands(commands, newRover);
+    }
+    
+    private interpretCommand(command: RoverCommand, rover: Rover): Rover {
+        switch (command.value) {
+            case 'f':
+                return rover.moveForward();
+            case 'b':
+                return rover.moveBackward();
+            case 'c':
+                return rover.turnClockwise();
+            case 'a':
+                return rover.turnAntiClockwise();
+            default:
+                return rover;
+        }
     }
 }
 

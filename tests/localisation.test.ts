@@ -40,21 +40,21 @@ describe('Localisation', () => {
 		);
 	});
 
-	test('should turn left', () => {
+	test('should turn clockwise', () => {
 		const newLocalisation = localisation.turnClockwise();
         const testLocalisation = new Localisation(
             position,
-            new Orientation(new Point(new Integer(-1), new Integer(0))))
+            new Orientation(new Point(new Integer(1), new Integer(0))))
 		expect(newLocalisation).toStrictEqual(
 			testLocalisation
 		);
 	});
 
-    test('should turn right', () => {
+    test('should turn anti clockwise', () => {
 		const newLocalisation = localisation.turnAntiClockwise();
         const testLocalisation = new Localisation(
             position,
-            new Orientation(new Point(new Integer(1), new Integer(0))))
+            new Orientation(new Point(new Integer(-1), new Integer(0))))
 		expect(newLocalisation).toStrictEqual(
 			testLocalisation
 		);

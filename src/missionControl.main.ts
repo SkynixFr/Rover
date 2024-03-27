@@ -1,6 +1,8 @@
 import { io } from "socket.io-client";
 import readline from "readline";
 
+
+//TODO: mettre un intermediaire pour gérer les sockets
 const socket = io("http://localhost:3001");
 
 const rl = readline.createInterface({
@@ -10,8 +12,14 @@ const rl = readline.createInterface({
 
 socket.on("connect", () => {
     console.log("Connected to the server.");
+    console.log("List of commands:");
+    console.log("   - f: move forward");
+    console.log("   - b: move backward");
+    console.log("   - c: turn clockwise");
+    console.log("   - a: turn anti-clockwise");
+    console.log("   - exit: disconnect from the server\n")
 
-    rl.setPrompt('Enter a sequence of commands containing (f, b, l, r) or "exit" to quit: ');
+    rl.setPrompt('Enter a sequence of commands containing (f, b, a, c) or "exit": ');
     rl.prompt();
 
     rl.on("line", (line) => {

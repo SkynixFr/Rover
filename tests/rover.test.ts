@@ -64,14 +64,14 @@ describe('Rover', () => {
 		);
 	});
 
-	test('should turn left', () => {
+	test('should turn clockwise', () => {
 		const newRover = rover.turnClockwise();
 		expect(newRover).toStrictEqual(
 			new RoverBuilder()
 				.withLocalisation(
 					new LocalisationBuilder()
 						.withOrientation(
-							new Orientation(new Point(new Integer(-1), new Integer(0)))
+							new Orientation(new Point(new Integer(1), new Integer(0)))
 						)
 						.build()
 				)
@@ -79,14 +79,14 @@ describe('Rover', () => {
 		);
 	});
 
-	test('should turn right', () => {
+	test('should turn anti clockwise', () => {
 		const newRover = rover.turnAntiClockwise();
 		expect(newRover).toStrictEqual(
 			new RoverBuilder()
 				.withLocalisation(
 					new LocalisationBuilder()
 						.withOrientation(
-							new Orientation(new Point(new Integer(1), new Integer(0)))
+							new Orientation(new Point(new Integer(-1), new Integer(0)))
 						)
 						.build()
 				)

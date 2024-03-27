@@ -10,17 +10,17 @@ describe('Orientation', () => {
 		orientation = new Orientation(initialVector);
 	});
 
-	test('should turn left', () => {
+	test('should turn clockwise', () => {
 		const result = orientation.turnClockwise();
 		expect(result).toStrictEqual(
-			new Orientation(new Point(new Integer(-1), new Integer(0)))
+			new Orientation(new Point(new Integer(1), new Integer(0)))
 		);
 	});
 
-	test('should turn right', () => {
+	test('should turn anti clockwise', () => {
 		const result = orientation.turnAntiClockwise();
 		expect(result).toStrictEqual(
-			new Orientation(new Point(new Integer(1), new Integer(0)))
+			new Orientation(new Point(new Integer(-1), new Integer(0)))
 		);
 	});
 	test('should display the orientation', () => {

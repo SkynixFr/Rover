@@ -4,7 +4,7 @@ class RoverCommand {
 	constructor(value: string) {
 		this.value = value
 			.split('')
-			.filter(char => ['f', 'b', 'l', 'r'].includes(char))
+			.filter(char => ['f', 'b', 'c', 'a'].includes(char))
 			.join('');
 	}
 
