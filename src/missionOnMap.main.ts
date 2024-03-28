@@ -7,6 +7,8 @@ import Orientation from './domain/orientation';
 import Localisation from './domain/localisation';
 import Rover from './domain/rover';
 import RoverListener from './passiveRover/roverListener';
+import WebSocketManager from "./webSocket/webSocketManager";
+
 
 // Create of a rover in position (0,0) and orientation (0,1)
 const initialRoverCoordinate = new Coordinate(new Point(new Integer(0), new Integer(0)), mapWithObstacles);
@@ -19,6 +21,7 @@ const roverController = new RoverInterpreter(mapWithObstacles);
 
 // Socket connection
 
-const roverListener = new RoverListener(rover, roverController);
+const communicationLayer = new WebSocketManager();
+const roverListener = new RoverListener(rover, roverController, communicationLayer);
 
 roverListener.listening();

@@ -1,5 +1,5 @@
 import readline from "readline";
-import WebSocketManager from "../webSocket/webSocketManager";
+import { ActiveCommunicationLayer } from "./activeCommunicationLayer";
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -7,9 +7,14 @@ const rl = readline.createInterface({
 });
 
 class missionControl {
-    private webSocketManager = new WebSocketManager();
-    private socket = this.webSocketManager.createSocket();
-    
+    private communicationManager: ActiveCommunicationLayer
+    private socket: any
+       
+    constructor(communicationManager: ActiveCommunicationLayer) {
+        this.communicationManager = communicationManager;
+        this.socket = this.communicationManager.createSocket();
+    }
+
     private displayHelp(): void {
         console.log("List of commands:");
         console.log("   - f: move forward");
