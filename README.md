@@ -30,7 +30,7 @@ npm install
 -  Lancement du serveur
 
 ```sh
-npx ts-node src/missionOnMap.ts 
+npx ts-node src/missionOnMap.main.ts 
 ```
 
 -  Lancement du client
