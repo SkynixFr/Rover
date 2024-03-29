@@ -1,4 +1,4 @@
-import RoverController from '../src/missionControl/roverController';
+import RoverInterpreter from '../src/domain/roverInterpreter';
 import Rover from '../src/domain/rover';
 import Coordinate from '../src/domain/coordinate';
 import Point from '../src/domain/point';
@@ -12,7 +12,7 @@ import CoordinateBuilder from './utils/coordinateBuilder';
 import LocalisationBuilder from './utils/localisationBuilder';
 
 describe('Commands', () => {
-	let roverController: RoverController;
+	let roverController: RoverInterpreter;
 	let rover: Rover;
 	let testRover: Rover;
 	let initialCoordinate: Coordinate;
@@ -37,7 +37,7 @@ describe('Commands', () => {
 			)
 			.build();
 		testRover = rover;
-		roverController = new RoverController(mapWithObstacles);
+		roverController = new RoverInterpreter(mapWithObstacles);
 	});
 
 	test('should move forward', () => {

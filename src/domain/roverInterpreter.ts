@@ -1,9 +1,9 @@
-import  Rover  from "../domain/rover";
-import Map from "../domain/map";
-import RoverCommand from "../domain/roverCommand";
+import  Rover  from "./rover";
+import Map from "./map";
+import RoverCommand from "./roverCommand";
 
 
-class RoverController {
+class RoverInterpreter {
     private readonly map: Map;
 
     public constructor(map: Map) {
@@ -44,4 +44,4 @@ class RoverController {
     }
 }
 
-export default RoverController;
+export default RoverInterpreter;
