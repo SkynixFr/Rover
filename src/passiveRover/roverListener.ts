@@ -17,16 +17,16 @@ class roverListener {
     }
     
     listening(): void {
-        this.communicationManager.registerCallback((commandString) => {
+        this.communicationManager.registerCallback((commandString, responseCallback) => {
 
             const roverCommand = new RoverCommand(commandString)
             console.log(`Received command for rover: ${roverCommand.display()}`);
 
             this.rover = this.roverController.interpretCommands(roverCommand, this.rover);
-            console.log(`The new position of the rover is:`, this.rover.localisation.display(), `\n`);
+            responseCallback(`The new position of the rover is:${this.rover.localisation.display()}\n`);
         });
 
-        this.communicationManager.startServer()
+        this.communicationManager.manageServer()
     };
 }
 

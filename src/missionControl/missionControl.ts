@@ -8,11 +8,9 @@ const rl = readline.createInterface({
 
 class missionControl {
     private communicationManager: ActiveCommunicationLayer
-    private socket: any
-       
-    constructor(communicationManager: ActiveCommunicationLayer) {
-        this.communicationManager = communicationManager;
-        this.socket = this.communicationManager.createSocket();
+    
+    constructor(connectionManager: ActiveCommunicationLayer) {
+        this.communicationManager = connectionManager;
     }
 
     private displayHelp(): void {
@@ -23,37 +21,30 @@ class missionControl {
         console.log("   - a: turn anti-clockwise");
         console.log("   - exit: disconnect from the server\n")
     }
-    
+
     private managePrompt(): void {
+        this.displayHelp();
         rl.setPrompt('Enter a sequence of commands containing (f, b, a, c) or "exit": ');
         rl.prompt();
     
-        rl.on("line", (line) => {
+        rl.on("line", async (line) => {
             if (line === "exit") {
-                this.socket.close();
+                this.communicationManager.dispose();
                 rl.close();
-            } else {
-                this.socket.emit("roverCommand", line);
+            } 
+            try {
+                const response = await this.communicationManager.sendMessageAndAwaitResponse("roverCommand", line);
+                console.log(`Response from the rover:`);
+                console.log(response)
                 rl.prompt();
+            } catch (error) {
+                console.error("Error:", error);
             }
-        });
+        });   
     }
-    
-    connectToServer(): void {
-        this.socket.on("connect", () => {
-            this.displayHelp();
-            this.managePrompt();
-        });
-        
-        this.socket.on("connect_error", (error: Error) => {
-            console.error("Connection failed:", error);
-            rl.close();
-        });
-        
-        this.socket.on("disconnect", () => {
-            console.log("Disconnected from the server.");
-            rl.close();
-        });
+
+    public connectToServer(): void {
+        this.communicationManager.manageConnectionToServer(this.managePrompt.bind(this), () => rl.close());
     }
 }
 
